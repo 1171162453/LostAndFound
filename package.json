@@ -1,0 +1,15 @@
+{
+  "name": "lost-and-found",
+  "version": "1.0.0",
+  "description": "A web lost and found system.",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^1.2.0",
+    "cookie-parser": "^1.4.2",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "jade": "^1.11.0",
+    "mongodb": "^2.1.19"
+  }
+}
