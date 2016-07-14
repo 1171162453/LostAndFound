@@ -4,7 +4,6 @@ function Comment(comment) {
   this._id = comment._id;
   this.pid = comment.pid;
   this.uid = comment.uid;
-  this.toUid = comment.toUid;
   this.content = comment.content;
   this.createTime = comment.createTime;
 }
