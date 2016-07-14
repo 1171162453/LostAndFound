@@ -1,0 +1,59 @@
+extends layout
+
+block content
+  div.container
+    div.row
+      div.col-xs-12.col-sm-9
+        div.panel.panel-default
+          div.panel-heading 修改个人信息
+          div.panel-body
+            form.form-horizontal(action='/photo', method='post', enctype='multipart/form-data')
+              div.form-group.col-sm-12
+                label.col-sm-2.col-xs-3.control-label 头像
+                div.col-sm-2.col-xs-2
+                  img.img-rounded(src='/imgs/photo/#{user.photo}', width='40px')
+                div.col-sm-4.col-xs-6
+                  input.form-control(type='file', name='photo')
+                div.text-center.col-sm-3.col-xs-6
+                  button.btn.btn-primary(type='submit') 确认
+            form.form-horizontal(action='/userm', method='post')
+              div.form-group.col-sm-6
+                label.col-sm-4.col-xs-3.control-label 昵称
+                div.col-sm-8.col-xs-8
+                  input.form-control(type='text', name='name', required, value='#{user.name}')
+              div.form-group.col-sm-6
+                label.col-sm-4.col-xs-3.control-label 电话
+                div.col-sm-8.col-xs-8
+                  input.form-control(type='text', placeholder='电话号码', name='phone', value='#{user.phone}')
+              div.form-group.col-sm-6
+                label.col-sm-4.col-xs-3.control-label QQ
+                div.col-sm-8.col-xs-8
+                  input.form-control(type='text', placeholder='qq号码', name='qq', value='#{user.qq}')
+              div.form-group.col-sm-6
+                label.col-sm-4.col-xs-3.control-label 性别
+                div.col-sm-8.col-xs-8
+                  select.form-control(name='gender', required, value='#{user.gender}')
+                    option(value='N' selected) 保密
+                    option(value='M') 男
+                    option(value='F') 女
+              div.form-group.col-sm-6
+                label.col-sm-4.col-xs-3.control-label 密码
+                div.col-sm-8.col-xs-8
+                  input.form-control(type='password', placeholder='输入新密码', name='password')
+              div.form-group.col-sm-6
+                label.col-sm-4.col-xs-3.control-label 再次
+                div.col-sm-8.col-xs-8
+                  input.form-control(type='password', placeholder='再次输入新密码', name='password-repeat')
+              div.form-group.col-sm-12
+                label.col-sm-2.col-xs-3.control-label 个签
+                div.col-sm-9.col-xs-8
+                  textarea.form-control(type='text', rows='3', name='info')
+                    | #{user.info}
+              div.form-group.col-sm-12
+                div.text-center
+                  button.btn.btn-primary(type='submit') 确认修改
+          if message
+            div.row
+              div.alert.alert-danger.col-sm-6.col-sm-offset-3.col-xs-8.col-xs-offset-2.text-center(role='alert') #{message}
+      div.hidden-xs.col-sm-3
+        include includes/sidebar

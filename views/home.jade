@@ -1,0 +1,90 @@
+extends layout
+
+block content
+  div.container
+    div.row
+      div.col-xs-12.col-sm-9
+        // Slide Imgs
+        div#carousel-home.carousel.slide(data-ride='carousel')
+          // Indicators
+          ol.carousel-indicators
+            li.active(data-target='#carousel-home', data-slide-to='0')
+            li(data-target='#carousel-home', data-slide-to='1')
+            li(data-target='#carousel-home', data-slide-to='2')
+          // Wrapper for slides
+          div.carousel-inner(role='listbox')
+            div.item.active
+              img(src='/imgs/0.jpg')
+              div.carousel-caption
+            div.item
+              img(src='/imgs/1.jpg')
+              div.carousel-caption
+            div.item
+              img(src='/imgs/2.jpg')
+              div.carousel-caption
+          // Controls
+          a.left.carousel-control(href='#carousel-home', role='button', data-slide='prev')
+            span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+            span.sr-only Previous
+          a.right.carousel-control(href='#carousel-home', role='button', data-slide='next')
+            span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+            span.sr-only Next
+        br
+        // 寻物信息
+        if losts.length > 0
+          div.panel.panel-default
+            div.panel-heading
+              | 寻物信息
+              div.more-button
+                a(href='/lost') 查看更多 >> 
+            div.table-responsive
+              table.table.table-hover
+                tr
+                  th 物品类别
+                  th 物品名称
+                  th 丢失时间
+                  th 丢失地点
+                  th 详情
+                each lost in losts
+                  tr
+                    td #{lost.itemCategory}
+                    td #{lost.itemName}
+                    td #{lost.itemTime.getFullYear()}-#{lost.itemTime.getMonth()+1}-#{lost.itemTime.getDate()}
+                    td #{lost.itemPlace}
+                    td
+                      a(href='/post/#{lost._id}')
+                        if lost.itemDetial.length > 25
+                          | #{lost.itemDetial.slice(0,25)}...
+                        else
+                          | #{lost.itemDetial}
+        // 招领信息
+        if founds.length > 0
+          div.panel.panel-default
+            div.panel-heading 招领信息
+              div.more-button
+                a(href='/found') 查看更多 >>
+            div.table-responsive
+              table.table.table-hover
+                tr
+                  th 物品类别
+                  th 物品名称
+                  th 丢失时间
+                  th 丢失地点
+                  th 详情
+                each found in founds
+                  tr
+                    td #{found.itemCategory}
+                    td #{found.itemName}
+                    td #{found.itemTime.getFullYear()}-#{found.itemTime.getMonth()+1}-#{found.itemTime.getDate()}
+                    td #{found.itemPlace}
+                    td
+                      a(href='/post/#{found._id}')
+                        if found.itemDetial.length > 25
+                          | #{found.itemDetial.slice(0,25)}...
+                        else
+                          | #{found.itemDetial}
+      // sidebar container
+      div.hidden-xs.col-sm-3.sidebar-container
+        include includes/sidebar
+
+

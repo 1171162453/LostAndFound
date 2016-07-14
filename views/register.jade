@@ -1,0 +1,23 @@
+extends layout
+
+block content
+
+  div.container
+    div.form-container
+      h3 注册中大失物招领
+      h4 寻找你遗失的那个Ta
+      p
+        a.btn.btn-link.btn-lg.disabled(href='/register') 注册
+        a.btn.btn-link.btn-lg(href='/login') 登录
+      form(method='post' action='/register')
+        label.sr-only(for='username') 用户名
+        input.form-control(type='text', id='username', name='username', placeholder='用户名' required autofocus)
+        label.sr-only(for='email') 邮箱
+        input.form-control(type='email', id='email', name='email', placeholder='邮箱' required)
+        label.sr-only(for='password') 密码
+        input.form-control(type='password', id='password', placeholder='密码' name='password' required)
+        label.sr-only(for='password-repeat') 再次输入密码
+        input.form-control(type='password', id='password-repeat', placeholder='再次输入密码' name='password-repeat' required)
+        button.btn.btn-lg.btn-primary.btn-block(type='submit') 注册
+      - if (message)
+        div.alert.alert-danger(role='alert') #{message}

@@ -1,0 +1,46 @@
+extends layout
+
+block content
+  div.container
+    div.row
+      div.col-xs-12.col-sm-9
+        div.panel.panel-default
+          div.panel-heading
+            | #{apost.title}
+          div.panel-body
+            form.form-horizontal(action='#{apost.action}', method='post')
+              div.form-group.col-sm-6
+                label.col-sm-4.col-xs-4.control-label 物品类别
+                div.col-sm-8.col-xs-8
+                  select.form-control(name='itemCategory', required)
+                    option(value='卡类证件') 卡类证件
+                    option(value='随身物品') 随身物品
+                    option(value='电子产品') 电子产品
+                    option(value='书籍资料') 书籍资料
+                    option(value='衣服饰品') 衣服饰品
+                    option(value='其他物品', selected='selected') 其他物品
+              div.form-group.col-sm-6
+                label.col-sm-4.col-xs-4.control-label 物品名称
+                div.col-sm-8.col-xs-8
+                  input.form-control(type='text', placeholder='物品名称', name='itemName', required)
+              div.form-group.col-sm-6
+                label.col-sm-4.col-xs-4.control-label #{apost.type}时间
+                div.col-sm-8.col-xs-8
+                 input.form-control(type='date', name='itemTime', required)
+              div.form-group.col-sm-6
+                label.col-sm-4.col-xs-4.control-label #{apost.type}地点
+                div.col-sm-8.col-xs-8
+                  input.form-control(type='text', placeholder='丢失地点', name='itemPlace', required)
+              div.form-group.col-sm-12
+                label.col-sm-2.col-xs-4.control-label 联系方式
+                div.col-sm-8.col-xs-8
+                  input.form-control(type='text', placeholder='联系方式只有登录用户申请才可查看', name='itemContact', required)
+              div.form-group.col-sm-12
+                label.col-sm-2.col-xs-4.control-label #{apost.type}详情
+                div.col-sm-9.col-xs-8
+                  textarea.form-control(type='text', rows='3' placeholder='#{apost.type}物品详细信息', name='itemDetial', required)
+              div.form-group.col-sm-12
+                div.text-center
+                  button.btn.btn-primary(type='submit') 发布
+      div.hidden-xs.col-sm-3
+        include includes/sidebar

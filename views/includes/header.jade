@@ -1,0 +1,111 @@
+nav.navbar.navbar-default.navbar-fixed-top
+  div.container
+    div.navbar-header
+      button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false' aria-controls='navbar')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand(href='/')
+        img(alt='L&FSYSU', src='/imgs/1.png' height='24px' width='100px')
+
+    div#navbar.navbar-collapse.collapse
+      // Left Side Of Navbar
+      ul.nav.navbar-nav
+        li.active
+          a(href='/')
+            span.glyphicon.glyphicon-home  
+            |  首页 
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true' aria-expanded='false')
+            span.glyphicon.glyphicon-list-alt
+            |  觅帖
+            span.caret 
+          ul.dropdown-menu
+            li
+              a(href='/lost') 浏览寻物帖 
+            li
+              a(href='/found') 浏览招领帖 
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true' aria-expanded='false')
+            span.glyphicon.glyphicon-edit
+            |  发帖
+            span.caret 
+          ul.dropdown-menu
+            li
+              a(href='/alost') 发布寻物帖
+            li
+              a(href='/afound') 发布招领帖
+      // Search of Navbar
+      form.navbar-form.navbar-left(role='search', action='/search', method='post')
+        div.form-group
+          input.form-control(type='text', placeholder='搜索', name='keywords')
+        button.btn.btn-link(type='submit')
+          span.glyphicon.glyphicon-search(aria-hidden='true')
+      // Right Side Of Navbar
+      ul.nav.navbar-nav.navbar-right
+        if user
+          li.dropdown
+            a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true' aria-expanded='false')
+              img.img-circle(src='/imgs/photo/#{user.photo}', alt='#{user.name}' height='24px')
+              | &nbsp&nbsp#{user.name}
+              span.caret
+            ul.dropdown-menu
+              li
+                a(href='/userm') 修改个人信息
+              li
+                a(href='/user/#{user._id}') 个人页面
+              li
+                a(href='/logout') 退出
+        else
+          li
+            a(data-toggle='modal', data-target='#modal-register') 注册
+          li
+            a(data-toggle='modal', data-target='#modal-login') 登录
+
+// for register
+div#modal-register.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+  div.modal-dialog.modal-sm(role='document')
+    div.modal-content  
+      div.modal-body
+        button.close(type='button', data-dismiss='modal', aria-label='Close')
+          span(aria-hidden='true') x
+        div.form-container
+          h3 注册中大失物招领
+          h4 寻找你遗失的那个Ta
+          p
+            a.btn.btn-link.btn-lg.disabled(data-dismiss='modal', data-toggle='modal', data-target='#modal-register') 注册
+            a.btn.btn-link.btn-lg(data-dismiss='modal', data-toggle='modal', data-target='#modal-login') 登录
+          form#form-register(method='post' action='/aregister')
+            label.sr-only(for='username') 用户名
+            input.form-control(type='text', id='username', name='username', placeholder='用户名' required autofocus)
+            label.sr-only(for='email') 邮箱
+            input.form-control(type='email', id='email', name='email', placeholder='邮箱' required)
+            label.sr-only(for='password') 密码
+            input.form-control(type='password', id='password', placeholder='密码' name='password' required)
+            label.sr-only(for='password-repeat') 再次输入密码
+            input.form-control(type='password', id='password-repeat', placeholder='再次输入密码' name='password-repeat' required)
+            button.btn.btn-lg.btn-primary.btn-block(type='submit') 注册
+          div#registerM(role='alert') 
+
+// for login
+div#modal-login.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+  div.modal-dialog.modal-sm(role='document')
+    div.modal-content  
+      div.modal-body
+        button.close(type='button', data-dismiss='modal', aria-label='Close')
+          span(aria-hidden='true') x
+        div.form-container
+          h3 登录中大失物招领
+          h4 寻找你遗失的那个Ta
+          p
+            a.btn.btn-link.btn-lg(data-dismiss='modal', data-toggle='modal', data-target='#modal-register') 注册
+            a.btn.btn-link.btn-lg.disabled(data-dismiss='modal', data-toggle='modal', data-target='#modal-login') 登录
+          form#form-login(method='post' action='/alogin')
+            label.sr-only(for='email') 邮箱
+            input.form-control(type='email', id='email', name='email', placeholder='邮箱' required autofocus)
+            label.sr-only(for='password') 密码
+            input.form-control(type='password', id='password', placeholder='密码' name='password' required)
+            button.btn.btn-lg.btn-primary.btn-block(type='submit') 登录
+          div#loginM(role='alert')
+
