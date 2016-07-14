@@ -45,7 +45,6 @@ Comment.getComments = function(query, sortRE, callback) {
 };
 
 
-
 // 添加一条评论，必须有 pid，uid，content 属性
 // 前置默认有 以上属性，toUid 可选，无 _id 属性
 Comment.addComment = function(newComment, callback) {
