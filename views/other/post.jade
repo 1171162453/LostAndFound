@@ -1,0 +1,86 @@
+extends layout
+
+block content
+  div.container
+    div.row
+      div.col-xs-12.col-sm-9
+        div.panel.panel-default
+          div.panel-heading
+            if post.postType == 0
+              | [招领信息] #{post.itemName}
+            else
+              | [寻物信息] #{post.itemName}
+          div.panel-body
+            div.row
+              div.col-sm-2.col-xs-2.img-area
+                p.text-center
+                  a(href='/user/#{post.uid}')
+                    img.img-rounded(src='/imgs/photo/#{post.author.photo}', width='40px')
+              div.col-sm-10.col-xs-10
+                p
+                  a(href='/user/#{post.uid}') #{post.author.name}
+                  |  于 #{post.startTime.getFullYear()}-#{post.startTime.getMonth()+1}-#{post.startTime.getDate()} 发布
+                table.table
+                  tr
+                    th 类别
+                    td #{post.itemCategory}
+                  tr
+                    th 名称
+                    td #{post.itemName}
+                  tr
+                    th 时间
+                    td #{post.itemTime.getFullYear()}-#{post.itemTime.getMonth()+1}-#{post.itemTime.getDate()}
+                  tr
+                    th 地点
+                    td #{post.itemPlace}
+                  tr
+                    th 详情
+                    td #{post.itemDetial}
+                  tr
+                    th 联系
+                    td #{post.itemContact}
+            div.row.lineforpost
+              div.col-sm-offset-1.col-xs-offset-1
+                p 登录后可进行评论
+            div#comments-area
+              if comments.length > 0
+                each comment in comments
+                  div.row
+                    div.col-sm-2.col-xs-2.img-area
+                      p.text-center
+                        a(href='/user/#{comment.uid}')
+                          img.img-rounded(src='/imgs/photo/#{comment.user.photo}', width='40px')
+                    div.col-sm-10.col-xs-10
+                      div
+                        p
+                          a(href='/user/#{comment.uid}')
+                            small #{comment.user.name}
+                        p #{comment.content}
+                        p
+                          small
+                            | #{comment.createTime.getFullYear()}-#{comment.createTime.getMonth()+1}-#{comment.createTime.getDate()} 发表评论
+                  hr
+            
+            div.row
+              div.col-sm-2.col-xs-2.img-area
+                p.text-center
+                  if user
+                    img.img-rounded(src='/imgs/photo/#{user.photo}', width='40px')
+                  else
+                    img.img-rounded(src='/imgs/photo/default.jpg', width='40px')
+              div.col-sm-10.col-xs-10
+                form#form-comment
+                  input(type='hidden', name='pid', value='#{post._id}')
+                  if user
+                    input(type='hidden', name='uid', value='#{user._id}')
+                  div.form-group
+                    textarea#add-comment-area.form-control(type='text', rows='3' placeholder='发表评论', name='content', required)
+                  div.form-group.text-right
+                    a#post-message.sr-only(tabindex='0', role='button', data-toggle='popover', data-trigger='click', data-content="something important", data-placement='left') s
+                    button.btn.btn-primary(type='submit') 发布
+
+      // sidebar container
+      div.hidden-xs.col-sm-3.sidebar-container
+        include includes/sidebar
+
+

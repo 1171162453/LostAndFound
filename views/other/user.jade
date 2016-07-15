@@ -1,0 +1,75 @@
+extends layout
+
+block content
+  div.container
+    div.row
+      div.col-xs-12.col-sm-9
+        div.panel.panel-default
+          div.panel-heading
+            | 个人信息
+          div.panel-body
+            div.row
+              div.col-sm-2.col-xs-2.img-area
+                p.text-center
+                  a(href='/user/#{thisUser._id}')
+                    img.img-rounded(src='/imgs/photo/#{thisUser.photo}', width='40px')
+              div.col-sm-10.col-xs-10
+                p
+                  a(href='/user/#{thisUser._id}') #{thisUser.name}
+                  |  于 #{thisUser.createTime.getFullYear()}-#{thisUser.createTime.getMonth()+1}-#{thisUser.createTime.getDate()} 加入 中大失物招领
+                table.table
+                  tr
+                    th 昵称
+                    td #{thisUser.name}
+                  tr
+                    th 电话
+                    td #{thisUser.phone}
+                  tr
+                    th qq
+                    td #{thisUser.qq}
+                  tr
+                    th 性别
+                    td
+                      if (thisUser.gender == 'M')
+                        | 男
+                      else if (thisUser.gender == 'F')
+                        | 女
+                      else
+                        | 保密
+                  tr
+                    th 个签
+                    td #{thisUser.info}
+        // 信息
+        if posts.length > 0
+          div.panel.panel-default
+            div.panel-heading
+              | 发布的信息
+            div.table-responsive
+              table.table.table-hover
+                tr
+                  th 信息类别
+                  th 物品名称
+                  th 丢失时间
+                  th 丢失地点
+                  th 详情
+                each post in posts
+                  tr
+                    td
+                      if post.postType == 0
+                        | 招领信息
+                      else
+                        | 寻物信息
+                    td #{post.itemName}
+                    td #{post.itemTime.getFullYear()}-#{post.itemTime.getMonth()+1}-#{post.itemTime.getDate()}
+                    td #{post.itemPlace}
+                    td
+                      a(href='/post/#{post._id}')
+                        if post.itemDetial.length > 25
+                          | #{post.itemDetial.slice(0,25)}...
+                        else
+                          | #{post.itemDetial}
+      // sidebar container
+      div.hidden-xs.col-sm-3.sidebar-container
+        include includes/sidebar
+
+
